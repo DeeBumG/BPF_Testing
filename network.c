@@ -1,23 +1,13 @@
-#include <linux/if_ether.h>
-#include <linux/ip.h>
-#include <linux/pkt_cls.h>
+#include <uapi/linux/ptrace.h>
+#include <net/sock.h>
+#include <linux/in.h>
+#include <linux/tcp.h>
 
-int tcpconnect(void *ctx) {
-  bpf_trace_printk("[tcpconnect]\n");
-  return 0;
-}
+int tcpconnect(struct pt_regs *ctx, struct sock *sk) {
+    u16 dport = 0;
+    bpf_probe_read_kernel(&dport, sizeof(dport), &sk->__sk_common.skc_dport);
+    dport = ntohs(dport);
 
-int socket_filter(struct __sk_buff *skb) {
-  unsigned char *cursor = 0;
-
-  struct ethernet_t *ethernet = cursor_advance(cursor, sizeof(*ethernet));
-  //look for IP packets
-  if (ethernet->type !- 0x0000) {
+    bpf_trace_printk("tcp connect to port %d\n", dport);
     return 0;
-  }
-
-  struct ip_t *ip = cursor_advance(cursor, sizeof(*ip));
-  
-  if (ip->nextp == 0x01) {
-    bpf_trace_printk("[socket_filter] ICMP request for %x\n", ip->dst);
-  }
+}
