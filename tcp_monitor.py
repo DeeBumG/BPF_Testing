@@ -6,9 +6,10 @@ from pyroute2 import IPRoute
 
 interface = "eth0"
 
-b = BPF(src_file="network.c")
+b = BPF(src_file="tcp_monitor.c")
 
 b.attach_kprobe(event="tcp_v4_connect", fn_name="tcpconnect")
+
 
 print("Ready")
 
