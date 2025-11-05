@@ -9,7 +9,7 @@ def main():
 
     fn = b.load_func("xdp_main", BPF.XDP)
     
-    interface = "ens33"
+    interface = "enp175s0f1" #172.16.2.2
 
     try:
         b.attach_xdp(interface, fn, 0)

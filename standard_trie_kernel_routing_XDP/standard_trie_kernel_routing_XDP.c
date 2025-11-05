@@ -1,4 +1,4 @@
-#include <linux/bpf.h>
+//#include <linux/bpf.h>
 #include <linux/if_ether.h>
 #include <linux/ip.h>
 #include <linux/in.h>
@@ -39,8 +39,9 @@ int xdp_main(struct xdp_md *ctx) {
     
     bpf_trace_printk("Redirecting...\n");
     
-    memcpy(eth->h_dest, fib_params.dmac, ETH_ALEN); //setting nexthop mac
-    
+    //memcpy(eth->h_dest, fib_params.dmac, ETH_ALEN); //setting nexthop mac
+    memcpy(eth->h_dest, fib_params.dmac, ETH_ALEN);  // Set destination MAC (next hop)
+    memcpy(eth->h_source, fib_params.smac, ETH_ALEN); // Set source MAC (outgoing interface)
     //eth = fib_params.dmac; //setting nexthop mac
 
     // -------------------------------
