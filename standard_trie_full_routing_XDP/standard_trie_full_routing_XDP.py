@@ -25,8 +25,8 @@ def get_interface_index(interface_name):
 
 def populate_route_table(trie_map):
     routes = [
-        ("0.0.0.0", 0, "enp175s0f1"),
-        #("192.168.255.0", 24, "enp175s0f0"),
+        #("0.0.0.0", 0, "enp175s0f1"),
+        ("172.16.1.255", 24, "enp175s0f1"),
         #("251.0.0.224", 27, "lo"),
     ]
     
