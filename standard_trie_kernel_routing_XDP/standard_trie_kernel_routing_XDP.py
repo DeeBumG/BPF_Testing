@@ -4,7 +4,6 @@ import socket
 import struct
 
 b = BPF(src_file="./standard_trie_kernel_routing_XDP.c")
-#b = BPF(src_file="./in_progress.c")
 def main():
 
     fn = b.load_func("xdp_main", BPF.XDP)
