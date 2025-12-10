@@ -13,7 +13,7 @@ struct route_info {
     __u8 smac[ETH_ALEN];  // Outgoing interface MAC (source)
 };
 
-BPF_LPM_TRIE(route_trie, struct lpm_key, struct route_info, 1024);
+BPF_LPM_TRIE(route_trie, struct lpm_key, struct route_info, 1000000);
 
 int xdp_main(struct xdp_md *ctx) {
     void *data_end = (void *)(long)ctx->data_end;
@@ -41,12 +41,12 @@ int xdp_main(struct xdp_md *ctx) {
     struct route_info *route = route_trie.lookup(&key);
 
     if (route) {
-        bpf_trace_printk("Route found for dst=%x\n", ip->daddr);
+        //bpf_trace_printk("Route found for dst=%x\n", ip->daddr);
         memcpy(eth->h_dest, route->dmac, ETH_ALEN);   // Next-hop MAC
         memcpy(eth->h_source, route->smac, ETH_ALEN); // Outgoing interface MAC
-        bpf_trace_printk("Redirecting to interface %u\n", route->ifindex);
-        bpf_redirect(route->ifindex, 0);
-        return XDP_REDIRECT;
+        //bpf_trace_printk("Redirecting to interface %u\n", route->ifindex);
+        return bpf_redirect(route->ifindex, 0);
+        //return XDP_REDIRECT;
     }
 
     bpf_trace_printk("No route for dst=%x\n", ip->daddr);

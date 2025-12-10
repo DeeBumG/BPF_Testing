@@ -29,15 +29,10 @@ int xdp_main(struct xdp_md *ctx) {
     //lookup from kernel routing table
     int rc = bpf_fib_lookup(ctx, &fib_params, sizeof(fib_params), 0);
 
-    bpf_trace_printk("Redirecting...\n");
-
     memcpy(eth->h_dest, fib_params.dmac, ETH_ALEN);  // Set destination MAC (next hop)
     memcpy(eth->h_source, fib_params.smac, ETH_ALEN); // Set source MAC (outgoing interface)
-
-    if (bpf_redirect(fib_params.ifindex, 0) == XDP_REDIRECT){
-        bpf_trace_printk("Redirected on interface: %u \n", fib_params.ifindex);
-        return XDP_REDIRECT;
-    };
+    //bpf_trace_printk("Redirected on interface: %u \n", fib_params.ifindex);
+    return (bpf_redirect(fib_params.ifindex, 0));
 
     bpf_trace_printk("LOOKUP / REDIRECT FAILURE!\n");
     bpf_trace_printk("Return Code: %d", rc);

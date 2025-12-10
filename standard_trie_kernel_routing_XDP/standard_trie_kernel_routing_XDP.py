@@ -4,23 +4,27 @@ import socket
 import struct
 
 b = BPF(src_file="./standard_trie_kernel_routing_XDP.c")
-
+#b = BPF(src_file="./in_progress.c")
 def main():
 
     fn = b.load_func("xdp_main", BPF.XDP)
     
-    interface = "enp175s0f1" #172.16.2.2
+    interface1 = "enp175s0f1" 
+    interface0 = "enp175s0f0"
 
     try:
-        b.attach_xdp(interface, fn, 0)
-        print(f"\nXDP program attached to {interface}")
+        b.attach_xdp(interface1, fn, 0)
+        print(f"\nXDP program attached to {interface1}")
+        b.attach_xdp(interface0, fn, 0)
+        print(f"\nXDP program attached to {interface0}")
         print("Press Ctrl+C to exit...")
         print("=" * 60)
         b.trace_print()
     except KeyboardInterrupt:
         print("\nDetaching XDP program...")
     finally:
-        b.remove_xdp(interface, 0)
+        b.remove_xdp(interface1, 0)
+        b.remove_xdp(interface0, 0)
         print("Done.")
 
 if __name__ == "__main__":
