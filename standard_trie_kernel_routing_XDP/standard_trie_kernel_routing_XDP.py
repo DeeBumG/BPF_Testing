@@ -4,6 +4,7 @@ import socket
 import struct
 
 b = BPF(src_file="./standard_trie_kernel_routing_XDP.c")
+
 def main():
 
     fn = b.load_func("xdp_main", BPF.XDP)
@@ -20,7 +21,7 @@ def main():
         print("=" * 60)
         b.trace_print()
     except KeyboardInterrupt:
-        print("\nDetaching XDP program...")
+        print("\nDetaching XDP programs...")
     finally:
         b.remove_xdp(interface1, 0)
         b.remove_xdp(interface0, 0)

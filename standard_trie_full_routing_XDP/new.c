@@ -40,13 +40,39 @@ int xdp_main(struct xdp_md *ctx) {
     struct route_info *route = route_trie.lookup(&key);
 
     if (route) {
-        //bpf_trace_printk("Route found for dst=%x\n", ip->daddr);
+        // **FIX 1: Prevent U-turn forwarding**
+        // Never redirect packet back out the interface it arrived on
+        if (route->ifindex == ctx->ingress_ifindex) {
+            // This packet is either:
+            // - Destined for this interface itself (local delivery)
+            // - A routing loop/misconfiguration
+            // Let the kernel handle it via XDP_PASS
+            return XDP_PASS;
+        }
+
+        // **FIX 2: TTL check (standard forwarding requirement)**
+        // Decrement and check TTL to prevent routing loops
+        if (ip->ttl <= 1) {
+            // TTL expired - let kernel generate ICMP Time Exceeded
+            return XDP_PASS;
+        }
+
+        // Decrement TTL
+        ip->ttl--;
+        
+        // Recalculate IP checksum for TTL change
+        // Using incremental checksum update (RFC 1624)
+        __u32 csum = ip->check;
+        csum += htons(0x0100);  // Add 1 to TTL field
+        ip->check = csum + ((csum >= 0xFFFF) ? 1 : 0);  // Add carry
+
+        // Rewrite L2 headers and redirect
         memcpy(eth->h_dest, route->dmac, ETH_ALEN);   // Next-hop MAC
         memcpy(eth->h_source, route->smac, ETH_ALEN); // Outgoing interface MAC
-        //bpf_trace_printk("Redirecting to interface %u\n", route->ifindex);
+        
         return bpf_redirect(route->ifindex, 0);
     }
 
-    bpf_trace_printk("No route for dst=%x\n", ip->daddr);
+    // No route found - pass to kernel for handling (ICMP unreachable, etc.)
     return XDP_PASS;
 }

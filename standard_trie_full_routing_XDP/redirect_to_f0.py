@@ -57,6 +57,7 @@ def populate_route_table(trie_map):
 
     counter = 0
 
+    #logic taken from previous python script that fills kernel routes on target
     with open("routeviews-rv2-20230211-1200.pfx2as") as file:
         for line in file:
             if counter < 45465 or counter > 48788:
@@ -100,21 +101,17 @@ def main():
     fn = b.load_func("xdp_main", BPF.XDP)
 
 
-    interface_rx = "enp175s0f1"  # Interface receiving packets
-    interface_tx = "enp175s0f0"  # Interface for transmitting
-
-    attached_interfaces = []
+    interface1 = "enp175s0f1"
+    interface0 = "enp175s0f0"
 
     try:
-        b.attach_xdp(interface_rx, fn, 0)
-        attached_interfaces.append(interface_rx)
-        print(f"XDP program attached to {interface_rx} (RX interface)")
+        b.attach_xdp(interface1, fn, 0)
+        print(f"XDP program attached to {interface1} (RX interface)")
 
-        b.attach_xdp(interface_tx, fn, 0)
-        attached_interfaces.append(interface_tx)
-        print(f"XDP program attached to {interface_tx} (TX interface)")
+        b.attach_xdp(interface0, fn, 0)
+        print(f"XDP program attached to {interface0} (TX interface)")
 
-        print("\nBoth interfaces configured for XDP redirect")
+        print("\nInterfaces configured for XDP redirect f1 -> f0")
         print("Press Ctrl+C to exit...")
         print("=" * 60)
         b.trace_print()
@@ -124,12 +121,13 @@ def main():
     except Exception as e:
         print(f"Error: {e}")
     finally:
-        for iface in attached_interfaces:
-            try:
-                b.remove_xdp(iface, 0)
-                print(f"Detached XDP from {iface}")
-            except Exception as e:
-                print(f"Error detaching from {iface}: {e}")
+        try:
+            b.remove_xdp(interface1, 0)
+            print(f"Detached XDP from {interface0}")
+            b.remove_xdp(interface0, 0)
+            print(f"Detached XDP from {interface0}")
+        except Exception as e:
+            print(f"Error detaching from interface: {e}")
         print("Done.")
 
 if __name__ == "__main__":
