@@ -2,7 +2,7 @@
 from bcc import BPF
 import time
 
-KERNEL_FUNCTION = "bpf_xdp_fib_lookup"
+KERNEL_FUNCTION = "bpf_map_lookup_elem"
 
 BPF_PROGRAM = r"""
 #include <linux/ptrace.h>
@@ -11,7 +11,7 @@ BPF_HASH(start, u32, u64, 10240);   /* tid -> entry timestamp (ns)        */
 BPF_PERCPU_ARRAY(total_ns,    u64, 1);  /* per-cpu cumulative ns          */
 BPF_PERCPU_ARRAY(total_calls, u64, 1);  /* per-cpu cumulative call count  */
 
-int kprobe__bpf_xdp_fib_lookup(struct pt_regs *ctx)
+int kprobe__bpf_map_lookup_elem(struct pt_regs *ctx)
 {
     u32 tid = (u32)bpf_get_current_pid_tgid();
     u64 ts  = bpf_ktime_get_ns();
@@ -19,7 +19,7 @@ int kprobe__bpf_xdp_fib_lookup(struct pt_regs *ctx)
     return 0;
 }
 
-int kretprobe__bpf_xdp_fib_lookup(struct pt_regs *ctx)
+int kretprobe__bpf_map_lookup_elem(struct pt_regs *ctx)
 {
     u32 tid  = (u32)bpf_get_current_pid_tgid();
     u64 *tsp = start.lookup(&tid);
