@@ -5,7 +5,7 @@ import struct
 import ctypes as ct
 import fcntl
 
-b = BPF(src_file="./standard_trie_full_routing_XDP.c", debug=0)
+b = BPF(src_file="standard_trie_full_routing_XDP.c", debug=0)
 
 def ip_to_int(ip_str):
     """Convert IP string to integer (network byte order)"""
@@ -46,9 +46,9 @@ def populate_route_table(trie_map):
     routes = []
 
     # Configure which interface to use for routing
-    DEV_NAME = "enp175s0f0"  # Change to enp175s0f1 to redirect back to f1
+    DEV_NAME = "enp175s0f0np0"  # Change to enp175s0f1 to redirect back to f1
 
-    if DEV_NAME == "enp175s0f0":
+    if DEV_NAME == "enp175s0f0np0":
         NEXT_HOP_MAC = "e8:ea:6a:2a:c3:7a"  # Next hop for f0
         IFINDEX = 4  # ifindex for f0
     else:  # enp175s0f1
@@ -101,8 +101,8 @@ def main():
     fn = b.load_func("xdp_main", BPF.XDP)
 
 
-    interface1 = "enp175s0f1"
-    interface0 = "enp175s0f0"
+    interface1 = "enp175s0f1np1"
+    interface0 = "enp175s0f0np0"
 
     try:
         b.attach_xdp(interface1, fn, 0)

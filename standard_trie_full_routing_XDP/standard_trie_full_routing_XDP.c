@@ -13,6 +13,7 @@ struct route_info {
     __u8 smac[ETH_ALEN];  // Outgoing interface MAC (source)
 };
 
+//BPF_LPM_TRIE(route_trie, struct lpm_key, struct route_info, 1000000, BPF_F_NO_PREALLOC);
 BPF_LPM_TRIE(route_trie, struct lpm_key, struct route_info, 1000000);
 
 int xdp_main(struct xdp_md *ctx) {

@@ -46,9 +46,9 @@ def populate_route_table(trie_map):
     routes = []
 
     # Configure which interface to use for routing
-    DEV_NAME = "enp175s0f1"  # Change to enp175s0f0 to redirect to f0
+    DEV_NAME = "enp175s0f1np1"  # Change to enp175s0f0 to redirect to f0
 
-    if DEV_NAME == "enp175s0f0":
+    if DEV_NAME == "enp175s0f0np0":
         NEXT_HOP_MAC = "e8:ea:6a:2a:c3:7a"  # Next hop for f0
         IFINDEX = 4  # ifindex for f0
     else:  # enp175s0f1
@@ -101,8 +101,8 @@ def main():
     fn = b.load_func("xdp_main", BPF.XDP)
 
 
-    interface1 = "enp175s0f1"  # Interface receiving packets
-    interface0 = "enp175s0f0"  # Other interface (also receives a little traffic for some reason) - fixed, issue with the interface setup
+    interface1 = "enp175s0f1np1"  # Interface receiving packets
+    interface0 = "enp175s0f0np0"  # Other interface (also receives a little traffic for some reason) - fixed, issue with the interface setup
 
     try:
         b.attach_xdp(interface1, fn, 0)
