@@ -1,0 +1,192 @@
+Populating routing table...
+XDP program attached to enp175s0f1np1 (RX interface)
+XDP program attached to enp175s0f0np0 (TX interface)
+
+Interfaces configured for XDP redirect f1 -> f0
+Sampling lookup timing every 3s. Press Ctrl+C to exit.
+==============================================================================
+no lookups this interval
+interval: calls=      4541  avg=  230.9 ns   cumulative: calls=        4541  avg=  230.9 ns
+interval: calls=    506730  avg=  109.0 ns   cumulative: calls=      511271  avg=  110.0 ns
+interval: calls=   1302190  avg=   98.9 ns   cumulative: calls=     1813461  avg=  102.0 ns
+interval: calls=   2098243  avg=   97.3 ns   cumulative: calls=     3911704  avg=   99.5 ns
+interval: calls=   2637448  avg=   94.8 ns   cumulative: calls=     6549152  avg=   97.6 ns
+interval: calls=   2643796  avg=   94.2 ns   cumulative: calls=     9192948  avg=   96.6 ns
+interval: calls=   2647999  avg=   94.6 ns   cumulative: calls=    11840947  avg=   96.2 ns
+interval: calls=   2643502  avg=   94.7 ns   cumulative: calls=    14484449  avg=   95.9 ns
+interval: calls=   2652344  avg=   94.6 ns   cumulative: calls=    17136793  avg=   95.7 ns
+interval: calls=   2659071  avg=   95.6 ns   cumulative: calls=    19795864  avg=   95.7 ns
+interval: calls=   2661144  avg=   95.3 ns   cumulative: calls=    22457008  avg=   95.7 ns
+interval: calls=   2682793  avg=   95.8 ns   cumulative: calls=    25139801  avg=   95.7 ns
+interval: calls=   2694593  avg=   95.6 ns   cumulative: calls=    27834394  avg=   95.7 ns
+interval: calls=   2692200  avg=   95.5 ns   cumulative: calls=    30526594  avg=   95.6 ns
+interval: calls=   2674507  avg=   95.3 ns   cumulative: calls=    33201101  avg=   95.6 ns
+interval: calls=   2187748  avg=   94.6 ns   cumulative: calls=    35388849  avg=   95.6 ns
+interval: calls=   1376197  avg=   94.8 ns   cumulative: calls=    36765046  avg=   95.5 ns
+interval: calls=    576879  avg=   98.2 ns   cumulative: calls=    37341925  avg=   95.6 ns
+interval: calls=     23035  avg=  152.4 ns   cumulative: calls=    37364960  avg=   95.6 ns
+no lookups this interval
+interval: calls=       577  avg=  390.0 ns   cumulative: calls=    37365537  avg=   95.6 ns
+interval: calls=     53213  avg=  270.0 ns   cumulative: calls=    37418750  avg=   95.9 ns
+interval: calls=     67025  avg=  196.2 ns   cumulative: calls=    37485775  avg=   96.0 ns
+interval: calls=     66393  avg=  183.9 ns   cumulative: calls=    37552168  avg=   96.2 ns
+interval: calls=     34872  avg=  176.2 ns   cumulative: calls=    37587040  avg=   96.3 ns
+no lookups this interval
+no lookups this interval
+^C
+Detaching XDP programs...
+Detached XDP from enp175s0f1np1
+Detached XDP from enp175s0f0np0
+Done.
+
+
+-Per port stats table 
+      ports |               0 |               1 
+ -----------------------------------------------------------------------------------------
+   opackets |          360080 |        37224960 
+     obytes |        60401878 |     34311748177 
+   ipackets |               0 |               0 
+     ibytes |               0 |               0 
+    ierrors |               0 |               0 
+    oerrors |               0 |               0 
+      Tx Bw |       9.56 Mbps |       7.17 Mbps 
+
+-Global stats enabled 
+ Cpu Utilization : 0.5  %  7.0 Gb/core 
+ Platform_factor : 1.0  
+ Total-Tx        :      16.73 Mbps  
+ Total-Rx        :       0.00  bps  
+ Total-PPS       :      18.31 Kpps  
+ Total-CPS       :       0.00  cps  
+
+ Expected-PPS    :       3.76 Mpps  
+ Expected-CPS    :       8.33 Kcps  
+ Expected-BPS    :      27.50 Gbps  
+
+ Active-flows    :     1200  Clients :      254   Socket-util : 0.0075 %    
+ Open-flows      :    83280  Servers :      254   Socket :     1200 Socket/Clients :  4.7 
+ Total_queue_full : 1851236         
+ drop-rate       :      16.73 Mbps   
+ current time    : 72.6 sec  
+ test duration   : 0.0 sec  
+ *** TRex is shutting down - cause: 'test has ended'
+ latency daemon has stopped
+ All cores stopped !! 
+ ==================
+ interface sum 
+ ==================
+ --------------- 
+port : 0 
+------------
+ opackets                                 : 360880 
+ obytes                                   : 60513287 
+ ipackets                                 : 0 
+ ibytes                                   : 0 
+ Tx :       4.97 Mbps  
+port : 1 
+------------
+ opackets                                 : 37226160 
+ obytes                                   : 34311844577 
+ ipackets                                 : 0 
+ ibytes                                   : 0 
+ Tx :       3.75 Mbps  
+ Cpu Utilization : 0.5  %  3.7 Gb/core 
+ Platform_factor : 1.0  
+ Total-Tx        :       8.72 Mbps  
+ Total-Rx        :       0.00  bps  
+ Total-PPS       :       9.58 Kpps  
+ Total-CPS       :       0.00  cps  
+
+ Expected-PPS    :       3.76 Mpps  
+ Expected-CPS    :       8.33 Kcps  
+ Expected-BPS    :      27.50 Gbps  
+
+ Active-flows    :        0  Clients :      254   Socket-util : 0.0000 %    
+ Open-flows      :    83280  Servers :      254   Socket :        0 Socket/Clients :  0.0 
+ Total_queue_full : 1851236         
+ drop-rate       :       8.72 Mbps   
+ ==================
+ 
+
+ ==================
+ interface sum 
+ ==================
+------------------------ 
+ per core stats core id : 1  
+------------------------ 
+ m_tx_queue_full                          : 1851236 
+------------------------ 
+ per core per if stats id : 1  
+------------------------ 
+ port 0, queue id :0  - client 
+ ---------------------------- 
+ port 1, queue id :0  - server 
+ ---------------------------- 
+ m_tx_queue_full                          : 1851236 
+ ==================
+ generators 
+ ==================
+
+
+normal
+-------------
+ min_delta  : 10 usec 
+ cnt        : 0 
+ high_cnt   : 0 
+ max_d_time : 0 usec
+ sliding_average    : 0 usec
+ precent    : -nan %
+ histogram 
+ -----------
+ m_total_bytes                           :      32.01 Gbytes 
+ m_total_pkt                             :      37.59 Mpkt 
+ m_total_open_flows                      :      83.28 Kflows 
+ m_total_pkt                             : 37587040 
+ m_total_open_flows                      : 83280 
+ m_total_close_flows                     : 83280 
+ m_total_bytes                           : 34371682480 
+ --------------- 
+port : 0 
+------------
+ opackets                                 : 360880 
+ obytes                                   : 60513287 
+ ipackets                                 : 0 
+ ibytes                                   : 0 
+ Tx :       4.97 Mbps  
+port : 1 
+------------
+ opackets                                 : 37226160 
+ obytes                                   : 34311844577 
+ ipackets                                 : 0 
+ ibytes                                   : 0 
+ Tx :       3.75 Mbps  
+ Cpu Utilization : 0.5  %  3.7 Gb/core 
+ Platform_factor : 1.0  
+ Total-Tx        :       8.72 Mbps  
+ Total-Rx        :       0.00  bps  
+ Total-PPS       :       9.58 Kpps  
+ Total-CPS       :       0.00  cps  
+
+ Expected-PPS    :       3.76 Mpps  
+ Expected-CPS    :       8.33 Kcps  
+ Expected-BPS    :      27.50 Gbps  
+
+ Active-flows    :        0  Clients :      254   Socket-util : 0.0000 %    
+ Open-flows      :    83280  Servers :      254   Socket :        0 Socket/Clients :  0.0 
+ Total_queue_full : 1851236         
+ drop-rate       :       8.72 Mbps   
+ summary stats 
+ -------------- 
+ Total-pkt-drop       : 37587040 pkts 
+ Total-tx-bytes       : 34372357864 bytes 
+ Total-tx-sw-bytes    : 0 bytes 
+ Total-rx-bytes       : 0 byte 
+ 
+ Total-tx-pkt         : 37587040 pkts 
+ Total-rx-pkt         : 0 pkts 
+ Total-sw-tx-pkt      : 0 pkts 
+ Total-sw-err         : 1851236 pkts 
+ Total ARP sent       : 2 pkts 
+ Total ARP received   : 0 pkts 
+
+sudo ./t-rex-64 -f cap2/http.yaml -d 10 -m 1000

@@ -1,7 +1,7 @@
 import os
 
 GATEWAY_IP = "172.16.1.1"
-DEV_NAME = "enp175s0f0"
+DEV_NAME = "enp175s0f0np0"
 ROUTE_ADD1 = "ip route add"
 ROUTE_ADD2 = "via " + GATEWAY_IP
 
@@ -16,4 +16,4 @@ with open("routeviews-rv2-20230211-1200.pfx2as") as file:
         else:
             counter += 1
 
-os.system("sudo ip route add 28.0.0.0/8 via 172.16.1.1 dev enp175s0f0")
+os.system("sudo ip route add 28.0.0.0/8 via 172.16.1.1 dev enp175s0f0np0")
