@@ -20,3 +20,5 @@ The other 2 approaches are:
 There are timing programs throughout that are slightly modified versions of the above to time each lookup performed. 
 
 trials_m1000 contains test data of the 4 implementations only considering timing lookups. 
+
+Claude was used to do most of the heavy lifting for programming implementation.
