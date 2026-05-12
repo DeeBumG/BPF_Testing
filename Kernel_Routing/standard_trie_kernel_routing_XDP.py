@@ -9,8 +9,8 @@ def main():
 
     fn = b.load_func("xdp_main", BPF.XDP)
     
-    interface1 = "enp175s0f1" 
-    interface0 = "enp175s0f0"
+    interface1 = "enp175s0f1np1" 
+    interface0 = "enp175s0f0np0"
 
     try:
         b.attach_xdp(interface1, fn, 0)

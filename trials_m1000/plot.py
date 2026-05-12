@@ -41,10 +41,10 @@ SAMPLE_PERIOD_S = 3  # the scripts sample every 3 seconds
 
 # prefix -> (legend label, line color)
 DATASETS = [
-    ("full_poptrie_kernel",  "Poptrie (full kernel path)",         "#1f77b4"),
-    ("full_standard_kernel", "Standard LPM trie (full kernel path)","#2ca02c"),
-    ("kernel_XDP",           "XDP fib_lookup helper",              "#ff7f0e"),
-    ("raw_kernel",           "Raw kernel fib_table_lookup",        "#d62728"),
+    ("full_poptrie_kernel",  "Full Internal BPF XDP Poptrie Kernel",         "#1f77b4"),
+    ("full_standard_kernel", "Full Internal BPF XDP Standard Kernel)","#2ca02c"),
+    ("kernel_XDP",           "BPF XDP Kernel FIB Lookup",              "#ff7f0e"),
+    ("raw_kernel",           "Raw Kernel FIB Lookup",        "#d62728"),
 ]
 
 
