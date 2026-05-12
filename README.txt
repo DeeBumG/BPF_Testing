@@ -1,4 +1,4 @@
-# BPF_Testing
+BPF_Testing
 
 XDP programs for research to find faster routing methods for the Linux kernel.
 
